@@ -24,13 +24,3 @@ to a tweet. Keep it like that.
 - Lists or instructions that uninstall, root, or intentionally damage a TV, or that target a
   specific person's device.
 - Spam, affiliate links, or passing off someone else's work as your own.
-
-## Enforcement
-
-Maintainers may edit, hide or remove content and block accounts that break these rules, with a
-short explanation. To report something, open an issue, or if it is private, message
-[@gathint on X](https://x.com/gathint). Reports are read by the maintainer and handled within a
-few days.
-
-This is a short, plain-language code adapted in spirit from the
-[Contributor Covenant](https://www.contributor-covenant.org/version/2/1/code_of_conduct/).
