@@ -4,7 +4,7 @@ CatUI is a custom Android TV home screen with a glass-style interface and a pixe
 
 ## Download
 
-For a ready-to-install build, upload **`release/CatUI-v2.3.apk`** as an asset on the GitHub Release page. Download that APK from Releases; the source tree also contains the launcher code and build scripts.
+Download [CatUI-v2.3.apk](https://github.com/asishmohapatra09/CatUI-For-CleanYourTv/releases/download/Public_V1.0/CatUI-v2.3.apk) from the Public V1.0 release. Verify it against the matching entry in [SHA256SUMS.txt](https://github.com/asishmohapatra09/CatUI-For-CleanYourTv/releases/download/Public_V1.0/SHA256SUMS.txt) before installation. The source tree also contains the launcher code and build scripts.
 
 The APK in this release is version **2.3** (version code 4). Minimum Android version: **Android 8.0 / API 26**. The tested TV runs Android 9 / API 28.
 
