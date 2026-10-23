@@ -8,6 +8,24 @@ For a ready-to-install build, upload **`release/CatUI-v2.3.apk`** as an asset on
 
 The APK in this release is version **2.3** (version code 4). Minimum Android version: **Android 8.0 / API 26**. The tested TV runs Android 9 / API 28.
 
+> **[Open the copy-and-paste installation prompt](PROMPT.md)** — use it with a coding assistant to adapt the setup to your TV.
+
+## Screenshots
+
+These screenshots show CatUI on the TV. They include clear and rainy scenes, the night scene, and the expanded settings panel.
+
+<p align="center">
+  <img src="docs/screenshots/catui-day-rain.png" alt="CatUI daytime rainy scene" width="49%">
+  <img src="docs/screenshots/catui-day-clear.png" alt="CatUI daytime clear scene" width="49%">
+</p>
+<p align="center">
+  <img src="docs/screenshots/catui-night-rain-settings.png" alt="CatUI rainy night scene with settings open" width="49%">
+  <img src="docs/screenshots/catui-night-clear.png" alt="CatUI clear night scene" width="49%">
+</p>
+<p align="center">
+  <img src="docs/screenshots/catui-scene-art.png" alt="CatUI bedroom scene artwork" width="80%">
+</p>
+
 ## Features
 
 - A glass-style home screen, app dock, and full-screen app drawer navigated with a TV remote.
@@ -100,7 +118,6 @@ The source build uses the Android SDK and may require internet access to downloa
 - **CatUI bedroom scene art and concept images:** © **Asish Mohapatra**. The scene art is supplied by the project author; please ask the author before reusing it.
 - **[CleanYourTV](https://cleanyour.tv/#ch-04)** — Android TV setup and debloating reference. The upstream project and its license are linked in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
 - **[glassOS-tv](https://github.com/jmarknavarro/glassOS-tv)** — inspiration for CatUI's glass-style interface only. The bedroom art is by Asish Mohapatra.
-- **[Cosy Home TV](https://github.com/oliverjwroberts/cosy-home-tv)** — earlier launcher/scene-weather work informed the prior CosyGlassOS iteration. It did not provide CatUI's bedroom artwork.
 - **Outfit typeface** — [Outfit Fonts](https://github.com/Outfitio/Outfit-Fonts), SIL Open Font License 1.1.
 - **Weather** — [Open-Meteo](https://open-meteo.com/).
 
