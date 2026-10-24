@@ -36,11 +36,11 @@ Run everything directly from your Android phone without needing a computer or ty
 
 [![Download CatUI TV Cleaner](https://img.shields.io/badge/⬇️_Download-CatUI_TV_Cleaner_APK-2ea44f?style=for-the-badge&logo=android&logoColor=white)](https://github.com/asishmohapatra09/CatUI-For-CleanYourTv/releases/download/APK_V1.0/CatUI-TV-Cleaner.apk)
 
-- **Direct Download Link:** [`CatUI-TV-Cleaner.apk`](https://github.com/asishmohapatra09/CatUI-For-CleanYourTv/releases/download/APK_V1.0/CatUI-TV-Cleaner.apk) *(~24.8 MB)*
+- **Direct Download Link:** [`CatUI-TV-Cleaner.apk`](https://github.com/asishmohapatra09/CatUI-For-CleanYourTv/releases/download/APK_V1.0/CatUI-TV-Cleaner.apk) *(~25.1 MB)*
 - **GitHub Release Page:** [APK_V1.0 Release](https://github.com/asishmohapatra09/CatUI-For-CleanYourTv/releases/tag/APK_V1.0)
 - **Application ID:** `com.asish.cleanyourtv`
 - **Minimum Phone OS:** Android 8.0+
-- **SHA-256:** `2F23898F4171DB64F96C781BC63DC7750BAD797FC876339C51ABB455287E0C43`
+- **SHA-256:** `1AD02D490C0BE6804608C3C77DE588C2968FFB9522508C0C6F470401E19A4296`
 
 ### 🚀 Step-by-Step Instructions
 
