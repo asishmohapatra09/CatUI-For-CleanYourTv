@@ -187,7 +187,7 @@ No. The debloating process only disables packages in user space (<code>pm disabl
 ## 🙏 Credits & Acknowledgments
 
 - **CleanYourTV App Concept:** Sincere thanks and credit to [udhaykumarbala/cleanyourtv-app](https://github.com/udhaykumarbala/cleanyourtv-app) for the open-source companion app architecture and design concepts.
--**CleanYourTv Concept:** Sincere thanks and credit to Gathin23 (https://github.com/Gathin23/cleanyourtv)
+- **CleanYourTv Concept:** Sincere thanks and credit to Gathin23 (https://github.com/Gathin23/cleanyourtv)
 - **CatUI Launcher:** Credit to the CatUI project for the sleek Apple TV-style interface.
 - **Maintained & Enhanced By:** [Asish Mohapatra](https://github.com/asishmohapatra09)
 
