@@ -1,86 +1,169 @@
-# Copy-and-paste LLM installation prompt
+# The prompt
 
-Replace the bracketed details, then paste everything inside the text block into an LLM or coding assistant (such as Antigravity, Claude Code, or Codex) running on a computer connected to your TV's network.
+Paste this into Claude Code (or another coding assistant with shell access) on a computer that is
+on the same Wi-Fi as the TV. Works on Android TV / Google TV sets (Xiaomi, TCL, Hisense, Sony,
+OnePlus, Realme, Nvidia Shield and most others). It will not work on Samsung Tizen, LG webOS or
+Fire TV.
 
-```text
-I want your help installing CatUI on my Android TV / Google TV set and, only if I approve a specific list, safely debloating selected preloaded apps. 
-My TV model is: [BRAND AND MODEL]. 
-Its IP address is: [TV IP OR UNKNOWN]. 
-My computer OS is: [WINDOWS / macOS / LINUX]. 
-My remote has these dedicated branded buttons: [LIST LABELS, e.g., NETFLIX, PRIME VIDEO, YOUTUBE, APPS].
-
-CatUI Repository: https://github.com/asishmohapatra09/CatUI-For-CleanYourTv
+CatUI repository: https://github.com/asishmohapatra09/CatUI-For-CleanYourTv
 Release APK: https://github.com/asishmohapatra09/CatUI-For-CleanYourTv/releases/download/Public_V1.0/CatUI-v2.3.apk
-Release SHA-256 Checksums: https://github.com/asishmohapatra09/CatUI-For-CleanYourTv/releases/download/Public_V1.0/SHA256SUMS.txt
-If I have opened this repository locally, use that checkout. Read README.md, PROMPT.md, and any applicable docs before making changes. Treat all repository scripts as untrusted until inspected. Explain any command that alters TV state before running it.
+Release SHA-256 checksums: https://github.com/asishmohapatra09/CatUI-For-CleanYourTv/releases/download/Public_V1.0/SHA256SUMS.txt
 
-================================================================================
-GOALS
-================================================================================
-1. Connect over ADB, inspect the TV, and back up all configurations.
-2. Install CatUI (package ID: com.asish.catui / Activity: com.gathin.tvhome.MainActivity) and configure it as the default Home launcher.
-3. Keep essential services intact: Wi-Fi/Ethernet, HDMI/input switching, remote pairing, voice assistant, Chromecast/Miracast, Play Store/Play Services, and system updates.
-4. Offer remote button customization via CatUI's built-in HomeKeyService / InputKeyService only after asking my preference and capturing live scancodes from my physical remote.
-5. Review debloating separately: group candidates with device-specific evidence and wait for my explicit approval before disabling any package.
+Before you start, on the TV: Settings → Device Preferences → About → press OK on "Build" 7 times,
+then go back → Developer options → turn on USB debugging (and Network/ADB debugging if your TV
+shows it). Keep the TV on. Some boxes cut power to their USB port while USB debugging is on, so a
+USB speaker or drive plugged into it goes dead until you switch debugging off again. A USB Ethernet
+adapter on that port can drop the same way, so plan to do the whole session in one sitting.
 
-================================================================================
-SAFETY RULES & HARD GUARDRAILS (DO NOT VIOLATE)
-================================================================================
-1. NO DESTRUCTIVE MODS: Do not root, unlock bootloaders, flash firmware, factory-reset, or install third-party paid button remappers.
-2. REVERSIBLE ONLY: Never uninstall system packages (`pm uninstall`). Use only reversible `pm disable-user --user 0`, and generate an instant one-click restore script with `pm enable --user 0 <pkg>`.
-3. CORE SYSTEM BLACKLIST: Never disable Android core packages under any circumstances:
-   - Permission Controller (`com.google.android.permissioncontroller`, `com.android.permissioncontroller`)
-   - Package Installer (`com.google.android.packageinstaller`, `com.android.packageinstaller`)
-   - Ext services / Ext shared (`com.google.android.ext.services`, `com.google.android.ext.shared`)
-   - Module metadata (`*modulemetadata*`)
-   - System UI (`com.android.systemui`), Shell (`com.android.shell`), Settings (`com.android.settings`, `com.android.tv.settings`), and `android`.
-   Disabling any of these can permanently brick the device (e.g. Mi TV Stick issue #884).
-4. FACTORY MENU BLACKLIST: Never open or test packages containing "fac", "factory", "at", or "production" (`com.cvte.tv.hkcfac`, `com.cvte.tv.fac.menu`, `com.at.factory.*`, `mediatek.factorymenu.ui`). Opening one flips an irreversible factory-mode flag on CVTE/Haier boards that kills HDMI Input, CEC, Netflix, and Chromecast. Inspect them only via `dumpsys package`.
-5. GOOGLE TV WI-FI TRAP: On Google TV, if `com.google.android.tungsten.setupwraith` is present, check `dumpsys wifi | grep -o 'cname=[^ ]*'`. If Wi-Fi was saved during first-time setup, disabling setupwraith deletes the Wi-Fi credentials instantly and drops ADB.
-6. HARDWARE & USB POWER: Warn me if USB debugging is known to cut power to USB ports on certain boxes (which can kill USB Ethernet adapters or USB drives).
-7. SINGLE-COMMAND EXECUTION: Execute `pm` commands one per shell call (never chain commands with `&&` or `;` inside `adb shell`, as TV shells can silently truncate).
-8. SCREENSHOT VERIFICATION: Disable packages in small batches (3-5 packages maximum) and capture TV screenshots between batches to ensure no critical UI or remote services were broken.
+---
 
-================================================================================
-STEP-BY-STEP EXECUTION
-================================================================================
+I want to debloat my Android TV and replace its launcher with CatUI (a clean Apple TV style home screen with live weather).
+My TV model is: <MODEL NAME HERE>. Work on the real device, step by step, and verify everything you
+do with screenshots pulled from the TV. Ask me before anything that depends on my preferences.
 
-PHASE 1: CONNECT & BACK UP
-- Connect via `adb connect <IP>:5555`. Remind me when the "Allow USB debugging?" authorization prompt will appear on screen.
-- Identify the device: report exact Brand, Model, Android version/SDK level, build ID, and display overrides (`wm size`, `wm density`).
-- Back up device state into a local folder: full package list (`pm list packages -f`), disabled packages (`pm list packages -d`), all properties (`getprop`), and settings (`settings list system`, `secure`, `global`).
-- Generate `restore.bat` / `restore.ps1` before any change is made.
+Connect
+- Find the TV on my network (hostname, ARP table, or ask me for the IP) and connect over ADB on port 5555.
+  If the TV is in another home, I'll give you its Tailscale address instead (docs/REMOTE.md): use that,
+  don't scan my local network.
+- If the stock adb binary fails with "No route to host" on macOS even though the port is open, that is
+  macOS Local Network privacy blocking adb. Don't debug it: use the Python `adb-shell` package in a venv
+  as the ADB client instead. If its file push hangs on larger files, transfer files as base64 chunks
+  through the shell and verify the md5.
+- If your own commands can't reach the TV at all while it answers from an ordinary terminal (a sandbox that
+  blocks the local network), ask me to run `tools/relay.py <tv ip>` in a terminal and leave it running, then
+  use `TV_HOST=127.0.0.1 TV_PORT=15555` (`tools/relay.md`).
+- If port 5555 stays closed, the TV may only offer Wireless debugging (Google TV sets often do): look for
+  `_adb-tls-connect._tcp` with `dns-sd -B` or `adb mdns services`, ask me for the code and port under
+  Developer options > Wireless debugging > Pair device with pairing code, then `adb pair`, `adb connect`
+  and `adb tcpip 5555`. Android switches Wireless debugging off whenever Wi-Fi drops.
+  Some firmware runs network ADB on another fixed port instead (a projector used 5877): if 5555 refuses and
+  nothing advertises Wireless debugging, scan the TV's own TCP ports and try each open one with `TV_PORT`.
+- Tell me when the "Allow USB debugging?" prompt will appear on the TV so I can accept it.
+- If `adb install` hangs on Android 14 it is waiting for an on-screen confirmation; push the APK to
+  `/data/local/tmp/` and run `pm install -r` over the shell instead.
 
-PHASE 2: INSTALL CATUI
-- Ask whether I want the pre-built Release APK or to build from source.
-- If Release APK:
-  - Download `CatUI-v2.3.apk` and `SHA256SUMS.txt` from the release URLs above.
-  - Verify the SHA-256 hash against the file before touching the TV. If verification fails, stop immediately.
-  - On Android 14+: Do not run plain `adb install` if it hangs waiting for an on-screen dialog. Push the APK to `/data/local/tmp/CatUI-v2.3.apk` and run `pm install -r /data/local/tmp/CatUI-v2.3.apk` over shell, then delete the temp file.
-- Launch CatUI (`am start -n com.asish.catui/com.gathin.tvhome.MainActivity`) and verify via screenshot that the interface renders properly.
-- Home takeover:
-  - Query HOME activities (`cmd package query-activities -a android.intent.action.MAIN -c android.intent.category.HOME`).
-  - Set CatUI as preferred: `cmd package set-home-activity com.asish.catui/com.gathin.tvhome.MainActivity`.
-  - If the stock launcher has priority >= 1 (e.g. `com.google.android.tvlauncher` or vendor launcher), explain this to me and ask for explicit approval to run `pm disable-user --user 0 <stock_launcher_package>`.
-  - Press KEYCODE_HOME (`input keyevent 3`) and verify with `dumpsys activity activities | grep mFocusedApp` that CatUI resumes.
+Back up first
+- Save the full package list, disabled-package list, getprop output and all settings to a backup folder
+  before changing anything, and write a restore script that re-enables everything you disable.
+- Ask me what is plugged into the TV's USB ports, and ask separately whether the TV's network comes
+  through a USB Ethernet adapter: "nothing plugged in" can be true while the network itself is on that
+  port. Some devices cut their power while USB debugging is on, so warn me, and remind me to switch
+  debugging off once you're done. On a set that reaches the network over USB Ethernet, check before you
+  change anything: `dumpsys usb | grep host_connected` (`host_connected=false` means the adapter is
+  already gone) and `dumpsys connectivity | grep -o 'Transports: [A-Z]*'` (`WIFI` on a TV I call wired
+  means the box fell back, and ADB is running over Wi-Fi). Finish the whole job in one sitting, not
+  two: there the port only returns with USB debugging off, and that closes port 5555 as well. Prefer
+  Wireless debugging if the TV has it.
+- When you finish, close network ADB instead of leaving it open: switch USB debugging and
+  Network/ADB debugging off on the TV, revoke the USB debugging authorisations, reboot, and check
+  that the port refuses the connection. If the TV's network came over a USB Ethernet adapter, unplug
+  and replug the adapter once debugging is off - the port comes back with it - and have me confirm the
+  TV is on Ethernet again, not Wi-Fi. Don't trust `nc` on macOS: Local Network privacy can block it
+  too, and its "No route to host" proves nothing; only "Connection refused" does. Port 5555 is
+  plaintext, and on firmware with `ro.adb.secure=0` any device on the LAN can get a shell.
 
-PHASE 3: REMOTE BUTTON CONFIGURATION (OPTIONAL)
-- Ask which dedicated app buttons are on my remote (e.g. Netflix, Prime Video, YouTube, Apps) and if I want to remap any of them to another app, CatUI Inputs, or leave them unchanged.
-- If remapping is requested:
-  - Do NOT guess scan codes. Ask me to press the specific physical button while capturing live events via `adb shell getevent -lt` or logcat.
-  - Map only verified keys. Preserve all existing accessibility services when appending CatUI's `HomeKeyService`.
+Debloat
+- List installed packages and sort them into: manufacturer telemetry/analytics, manufacturer content
+  and ad services (PatchWall, recommendation rows, content providers), background services I probably
+  don't need (share/cast duplicates, cleaners), preloaded apps, and streaming apps.
+- Disable the first categories with `pm disable-user --user 0`, never uninstall system packages.
+- Never disable what the TV needs to work: the TV app and input services that play HDMI and the
+  tuner, the input/source menu, remote control and Bluetooth pairing services, the on-screen
+  keyboard, Google Play Store and Play Services. Manufacturer package names often don't say what a
+  package does: check its activities and services with `dumpsys package` first, and ask me if it's
+  still unclear.
+- Never disable Android's own core packages, or the TV may not boot again: the permission controller,
+  the package installer, ext services and ext shared, module metadata (each as `com.android.*` or
+  `com.google.android.*`), `com.google.android.overlay.modules*`, `com.android.providers.*` (calendar,
+  contacts, user dictionary and blocked numbers aside), `com.android.systemui`, `com.android.shell`,
+  `com.android.phone`, `com.android.settings`, `com.android.tv.settings` and `android`. An original Mi TV
+  Stick never booted again after a list took the first six
+  ([#884](https://github.com/Gathin23/cleanyourtv/issues/884)); refuse such a list.
+- Before touching streaming apps, voice assistant, Chromecast, Miracast or the update service, ask me
+  which ones I use with a checklist question and disable only what I don't tick.
+- Run `pm` commands one per shell call, chained commands may silently stop after the first.
+- If `pm disable-user` is refused for every package, stop and tell me: some firmware (Fire OS 5 on a
+  Fire TV Box, for one) refuses `pm disable-user` with a `SecurityException`, `pm uninstall --user 0`
+  with `DELETE_FAILED_INTERNAL_ERROR`, and `pm hide` reports success while changing nothing. Check
+  with `pm list packages -d` instead of the exit code, and don't burn the session retrying - there is
+  nothing to debloat on such a set, so we fall back to its own privacy toggles and DNS blocking.
+- Don't launch a package whose name says factory, production, AT or fac menu (`com.cvte.tv.hkcfac`,
+  `com.cvte.tv.fac.menu`, `com.at.factory.*`, `mediatek.factorymenu.ui` and the like) to see what it does, even read-only:
+  on Haier/CVTE boards opening one flips a factory-mode flag that kills the Input key and CEC, and
+  makes the next boot disable Play services, Netflix and Chromecast - which the shell then cannot
+  re-enable. `dumpsys package <name>` tells you what a package is without starting it.
+- Disable in small batches and screenshot between them: a batch can take something load-bearing with
+  it and you cannot tell which.
+- After the last batch, reboot once and compare `pm list packages -d` with what you disabled: some
+  firmware re-enables packages at every boot from its own list (TCL Android 9 does this for its user
+  center). Note those in the list header instead of disabling them again after each boot. If
+  setupwraith or the stock launcher came back and Home is black, check `logcat | grep
+  RecoveryActivity` and re-enable the stock launcher before anything else.
+- Offer me ad-blocking DNS as an optional extra: on Android 9 and newer, Private DNS set to an
+  ad-blocking resolver (`settings put global private_dns_specifier dns.adguard-dns.com`, then
+  `settings put global private_dns_mode hostname`). Tell me it doesn't block YouTube ads, check an app
+  still plays afterwards, and note the undo (`private_dns_mode opportunistic`) in the README.
 
-PHASE 4: OPTIONAL DEBLOATING (REVIEW & APPROVAL ONLY)
-- Inspect installed packages and sort candidates into:
-  1. OEM Diagnostics, telemetry, and test apps
-  2. Ad services, recommendation rows, and content providers
-  3. Preloaded third-party demo apps
-- Present candidate packages in clear tables showing package name, description, and consequences.
-- Wait for my explicit approval of exact package names. Skip debloating entirely if I do not approve.
-- Disable approved packages in small batches with verification screenshots between each batch.
-- Offer optional AdGuard Private DNS (`settings put global private_dns_specifier dns.adguard-dns.com` & `settings put global private_dns_mode hostname`) on Android 9+, noting that it blocks system/app ads but not YouTube video ads, and provide the undo command.
+Launcher (CatUI)
+- Check that the TV accepts APKs and verify SDK level: `getprop ro.build.version.sdk` (CatUI requires
+  minSdk 26 / Android 8.0 or newer).
+- Auto-download CatUI: download `CatUI-v2.3.apk` from the Release APK URL above, and `SHA256SUMS.txt`
+  from the checksum URL above. Verify the downloaded APK's SHA-256 against `SHA256SUMS.txt` before
+  installing. Stop immediately if the checksum does not match; never install an unverified APK.
+- Install CatUI (`com.asish.catui`, MainActivity: `com.gathin.tvhome.MainActivity`). On Android 14,
+  push the verified APK to `/data/local/tmp/CatUI-v2.3.apk` and run `pm install -r /data/local/tmp/CatUI-v2.3.apk`
+  over the shell, then remove the temp file.
+- Set CatUI as default Home: list HOME activities with `cmd package query-activities -a android.intent.action.MAIN -c android.intent.category.HOME`
+  and set default with `cmd package set-home-activity com.asish.catui/com.gathin.tvhome.MainActivity`.
+  Because stock launchers declare priority > 0, disable the stock launcher with `pm disable-user --user 0 <stock_launcher>`
+  after asking for my confirmation, and verify with `dumpsys activity activities | grep mFocusedApp` that CatUI opens.
+- Before disabling the stock launcher, check which other apps claim HOME: on Google TV the setup wizard
+  (`com.google.android.tungsten.setupwraith`) takes over even after the stock launcher is disabled.
+  Before disabling setupwraith, run `dumpsys wifi | grep -o 'cname=[^ ]*'`: a Wi-Fi network saved
+  during first setup belongs to it, and Android deletes that network the moment it is disabled, which
+  takes the TV off Wi-Fi and ADB. If it does, ask me to forget the network and re-join it in Settings first.
+- On a CVTE board (any `com.cvte.*` package), leave its stock launcher (`com.cvte.tv.launcher.*`) enabled
+  unless verified safe: make CatUI Home with `set-home-activity`, reboot once, and confirm Home and ADB
+  come back before anything else.
+- Weather & Location Setup: CatUI features an Apple TV style greeting, live clock, and a live weather
+  scene that dynamically changes between day, dusk, night, rain, and snow using Open-Meteo.
+  Ask me which city or town my TV is located in (or its latitude and longitude).
+  Grant CatUI location permissions over shell: `pm grant com.asish.catui android.permission.ACCESS_FINE_LOCATION`
+  and `pm grant com.asish.catui android.permission.ACCESS_COARSE_LOCATION`.
+  Since TV sticks and boxes lack built-in GPS hardware, set the location on the device provider:
+  enable mock location (`appops set 2000 android:mock_location allow`), add the network test provider
+  (`cmd location providers add-test-provider network --requiresNetwork`), enable it, and set the coordinates
+  (`cmd location providers set-test-provider-location network --location <LAT>,<LON>`) with matching timezone.
+  Restart CatUI (`am force-stop com.asish.catui && am start -n com.asish.catui/com.gathin.tvhome.MainActivity`)
+  and verify the weather temperature and condition match the city.
+- Remote App Buttons & Key Services: On Google TV the stock launcher answers dedicated remote buttons
+  (Netflix, Prime Video, YouTube, Apps). After disabling it, ask me to test each button.
+  If any need remapping, capture real scan codes with `getevent -lt` or logcat and use CatUI's built-in
+  accessibility key service (`com.gathin.tvhome.HomeKeyService` / `InputKeyService`).
+  Before changing `enabled_accessibility_services`, inspect existing services and append CatUI's service
+  without overwriting others.
+- Ask how many dock slots I want (4, 5, 6 or 7), which apps, and their order; keep four or five if I
+  have no preference.
+- Design: Apple TV 4K style; pitch black background with dynamic live pixel weather; dock row inside a
+  translucent rounded band holding the apps I pick; rest of the apps in an app grid below; frosted pill
+  buttons top right for Control Center (Inputs, Wi-Fi, Bluetooth, Audio, and Settings); greeting, clock,
+  date, and live weather forecast top left.
+- Make D-pad navigation deterministic: Up/Down move exactly one row, Up from the dock goes to the top
+  bar, the ends of the top bar don't fall through to tiles. Remember the last focused tile.
+- Keep it light: TV sticks have about 1 GB of RAM. No heavy video backgrounds, no continuous polling.
 
-PHASE 5: FINAL VERIFICATION & CLEANUP
-- Verify D-pad navigation (Up, Down, Left, Right, OK), app launching, and settings access.
-- Confirm Wi-Fi, audio, and Bluetooth remote pairing remain 100% operational.
-- Provide a summary of all changes made, the paths to the backups and restore script, and ask whether I want to keep network ADB open or close debugging.
+Verify
+- After each change, inject remote key presses over ADB, take a screenshot from the TV and look at it:
+  capture what is on screen and pull the PNG. Fix what you see before moving on.
+- Live TV, HDMI and some streaming apps (Netflix) give empty screenshots (0 bytes); that is the TV DRM,
+  not a broken debloat. Check `dumpsys activity activities | grep topResumedActivity` instead.
+- If the screen looks enlarged and clipped after an install or a reboot, check display overrides before
+  editing anything: `wm size` and `wm density` show a physical value next to an override.
+- When done, give me a complete restore script, a build/reinstall script, and a README that explains how
+  to re-enable any package, how to change dock apps, and how to close network ADB.
+
+---
+
+Expect to answer four or five checklist questions (which apps you use, your city/location for the
+live weather scene, the dock size and app order, whether to keep the voice assistant, Chromecast and
+firmware updates). Everything is reversible.
