@@ -1,4 +1,6 @@
-# The prompt
+# Copy-and-paste LLM installation prompt
+Replace the bracketed details, then paste everything inside the text block into an LLM or coding assistant (such as Antigravity, Claude Code, or Codex) running on a computer connected to your TV's network.
+```text
 
 Paste this into Claude Code (or another coding assistant with shell access) on a computer that is
 on the same Wi-Fi as the TV. Works on Android TV / Google TV sets (Xiaomi, TCL, Hisense, Sony,
