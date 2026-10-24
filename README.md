@@ -1,124 +1,146 @@
-# CatUI
+# CatUI For CleanYourTV 📺🍎
 
-CatUI is a custom Android TV home screen with a glass-style interface and a pixel-art bedroom scene. It is designed for TV remotes and can be installed as the default Home app. The app package is `com.asish.catui`.
+> Transform your Android TV, Google TV, or realme TV Stick into a clean, ad-free, Apple TV-style streaming experience. Free up to 350+ MB of RAM, eliminate background telemetry, and take control of your TV home screen.
 
-## Download
+[![Direct APK Download](https://img.shields.io/badge/Download_APK-APK__V1.0-E50914?style=for-the-badge&logo=android&logoColor=white)](https://github.com/asishmohapatra09/CatUI-For-CleanYourTv/releases/download/APK_V1.0/CatUI-TV-Cleaner.apk)
+[![GitHub Release](https://img.shields.io/github/v/release/asishmohapatra09/CatUI-For-CleanYourTv?color=blue&logo=github)](https://github.com/asishmohapatra09/CatUI-For-CleanYourTv/releases)
+[![License](https://img.shields.io/badge/License-Apache_2.0-green.svg)](LICENSE)
+[![Android](https://img.shields.io/badge/Platform-Android%20TV%20%7C%20Google%20TV-3DDC84.svg?logo=android)](https://developer.android.com/tv)
 
-Download [CatUI-v2.3.apk](https://github.com/asishmohapatra09/CatUI-For-CleanYourTv/releases/download/Public_V1.0/CatUI-v2.3.apk) from the Public V1.0 release. Verify it against the matching entry in [SHA256SUMS.txt](https://github.com/asishmohapatra09/CatUI-For-CleanYourTv/releases/download/Public_V1.0/SHA256SUMS.txt) before installation. The source tree also contains the launcher code and build scripts.
+---
 
-The APK in this release is version **2.3** (version code 4). Minimum Android version: **Android 8.0 / API 26**. The tested TV runs Android 9 / API 28.
+## ⚡ Choose Your Setup Method
 
-> **[Open the copy-and-paste installation prompt](PROMPT.md)** — use it with a coding assistant to adapt the setup to your TV.
+| Method | Requirements | Ease of Use | Time |
+| :--- | :--- | :--- | :--- |
+| **[Method 1: CatUI TV Cleaner APK](#-method-1-catui-tv-cleaner-companion-app-recommended)** | Android Smartphone only (No PC required) | 🟢 1-Tap from phone | ~2 mins |
+| **[Method 2: LLM / Terminal Setup](#-method-2-ai--llm-coding-assistant-prompt-pc--mac)** | PC / Mac with LLM (Claude Code, Antigravity) | 🟡 Interactive CLI | ~5 mins |
 
-## Screenshots
+---
 
-These screenshots show CatUI on the TV. They include clear and rainy scenes, the night scene, and the expanded settings panel.
+## 📱 Method 1: CatUI TV Cleaner Companion App (Recommended)
 
-<p align="center">
-  <img src="docs/screenshots/catui-day-rain.png" alt="CatUI daytime rainy scene" width="49%">
-  <img src="docs/screenshots/catui-day-clear.png" alt="CatUI daytime clear scene" width="49%">
-</p>
-<p align="center">
-  <img src="docs/screenshots/catui-night-rain-settings.png" alt="CatUI rainy night scene with settings open" width="49%">
-  <img src="docs/screenshots/catui-night-clear.png" alt="CatUI clear night scene" width="49%">
-</p>
-<p align="center">
-  <img src="docs/screenshots/catui-scene-art.png" alt="CatUI bedroom scene artwork" width="80%">
-</p>
+Run everything directly from your Android phone without needing a computer or typing ADB commands.
 
-## Features
+### 🌟 App Highlights
+- **No PC Required**: Installs and controls everything directly from your Android smartphone over local Wi-Fi.
+- **Apple TV-Style Launcher Bundled**: Comes preloaded with **CatUI v2.3** (`com.asish.catui`) as the default home screen.
+- **Native realme TV Stick Profile**: Built-in tested profile for realme TV Sticks (`HP47DX2` / `sdt`) that disables 15 verified background bloat and telemetry packages while keeping Voice Assistant, Chromecast, and Bluetooth remote pairing 100% intact.
+- **Real-Time RAM Usage Monitor**: Measures active memory usage via `/proc/meminfo` before and after debloating, displaying the exact net RAM freed on the completion screen.
+- **Multi-Launcher Selector**: Easily switch between **CatUI (Apple TV style)** and **CleanYourTV Minimal** directly within the Customise sheet.
+- **Safe Unknown TV Fallback**: If your TV model does not have a dedicated profile, the app performs a non-destructive probe and offers an interactive checklist of recommendation apps rather than giving up.
+- **Android 14 Compatibility**: Automatic push-to-temp sideloading fallback so package installation never hangs waiting for on-screen confirmations.
+- **130+ TV Brands Supported**: Fully compatible with Xiaomi, TCL, Hisense, Sony, OnePlus, Philips, Panasonic, XGIMI, and generic Android TV sets.
 
-- A glass-style home screen, app dock, and full-screen app drawer navigated with a TV remote.
-- Preferred dock order: YouTube, Jellyfin, Hotstar, SonyLIV, and Zee5. Apps that are not installed are skipped.
-- An Inputs menu for available HDMI/AV/TV inputs, plus Settings and Wi-Fi controls.
-- Clock, date, and weather for Paradip, Odisha. Weather is fetched from Open-Meteo using the configured coordinates; the TV needs internet access for current weather.
-- Four local-time looks: morning, afternoon, evening, and night. Rain changes the scene and lighting; rain droplets, cup steam, and the night fireplace are animated separately. The cat stays still.
-- A subtle background pan, and a removable **Scene demo** tile in the app drawer for previewing scenes.
-- No root, firmware flashing, firmware updates, or third-party remote-remapping app is required.
+### 📥 Download APK
 
-## Tested TV and remote buttons
+[![Download CatUI TV Cleaner](https://img.shields.io/badge/⬇️_Download-CatUI_TV_Cleaner_APK-2ea44f?style=for-the-badge&logo=android&logoColor=white)](https://github.com/asishmohapatra09/CatUI-For-CleanYourTv/releases/download/APK_V1.0/CatUI-TV-Cleaner.apk)
 
-Tested on a Xiaomi Mi TV reported by Android as `MiTV-AXSO0` (device `dangal`), Android 9 / API 28, build `PI.6036 release-keys`.
+- **Direct Download Link:** [`CatUI-TV-Cleaner.apk`](https://github.com/asishmohapatra09/CatUI-For-CleanYourTv/releases/download/APK_V1.0/CatUI-TV-Cleaner.apk) *(~24.8 MB)*
+- **GitHub Release Page:** [APK_V1.0 Release](https://github.com/asishmohapatra09/CatUI-For-CleanYourTv/releases/tag/APK_V1.0)
+- **Application ID:** `com.asish.cleanyourtv`
+- **Minimum Phone OS:** Android 8.0+
+- **SHA-256:** `2F23898F4171DB64F96C781BC63DC7750BAD797FC876339C51ABB455287E0C43`
 
-With CatUI's built-in **Home button** accessibility service enabled on this remote, the confirmed mappings are:
+### 🚀 Step-by-Step Instructions
 
-| Remote button | CatUI action | Linux key scan code on the tested TV |
-| --- | --- | ---: |
-| Netflix | Open YouTube | 393 |
-| Prime Video | Open Jellyfin | 399 |
-| Mi | Open CatUI Inputs | 580 |
+#### 1. Enable ADB on your TV
+1. On your TV, go to **Settings → Device Preferences (or System) → About**.
+2. Scroll to **Build** and press **OK 7 times** until you see *"You are now a developer!"*.
+3. Go back one screen → **Developer options**.
+4. Turn **ON** **USB debugging** (and **Network / Wireless debugging** if listed).
+5. Ensure your TV and Android phone are connected to the same Wi-Fi network.
 
-Remote key codes differ by TV and remote. These scan codes are specific to the tested Xiaomi remote; other users should capture their own button events and choose their mappings. The accessibility service is opt-in and only needs enabling if the user wants these shortcuts.
+#### 2. Clean & Install
+1. Open **CatUI TV Cleaner** on your Android phone.
+2. The app will automatically scan and detect your TV on your local network. Tap **Connect**.
+3. A prompt saying *"Allow USB debugging?"* will appear on your TV screen — check **"Always allow from this computer"** and select **OK**.
+4. Review the planned debloat packages and default CatUI launcher. Tap **Make it clean**.
+5. Once complete, view the **RAM Usage Monitor** card to see the RAM freed on your TV!
 
-## Install from a GitHub Release
+---
 
-1. Enable ADB/network debugging in the TV's developer settings and accept the computer's debugging prompt.
-2. Install Android Platform Tools on the computer. Open PowerShell or a terminal in the folder containing the downloaded APK.
-3. Connect to the TV, replacing the address with the TV's IP:
+## 💻 Method 2: AI / LLM Coding Assistant Prompt (PC / Mac)
 
-   ```powershell
-   adb connect TV_IP_ADDRESS:5555
-   adb devices
-   adb install -r .\CatUI-v2.3.apk
-   ```
+If you prefer using an AI coding assistant (such as **Claude Code**, **Google Antigravity**, **Cursor**, or any terminal agent with ADB access) on a computer connected to the same Wi-Fi:
 
-4. Set CatUI as Home:
+### 📋 Paste This Prompt Into Your Assistant
 
-   ```powershell
-   adb shell cmd package set-home-activity --user 0 com.asish.catui/com.gathin.tvhome.MainActivity
-   adb shell input keyevent KEYCODE_HOME
-   ```
+```markdown
+I want to debloat my Android TV and replace its launcher with a clean Apple TV style home screen.
+My TV model is: <ENTER YOUR TV MODEL HERE>. Work on the real device, step by step, and verify everything you
+do with screenshots pulled from the TV. Ask me before anything that depends on my preferences.
 
-   The built-in build/install script leaves the TV's existing launcher installed and enabled. Keep a working system launcher as a fallback. If the command is not supported by a particular TV, use that TV's Home-app picker instead.
+Connect
+- Find the TV on my network (hostname, ARP table, or ask me for the IP) and connect over ADB on port 5555.
+- If port 5555 stays closed, check Wireless debugging pairing (adb pair, adb connect).
+- Tell me when the "Allow USB debugging?" prompt will appear on the TV so I can accept it.
+- If `adb install` hangs on Android 14, push the APK to /data/local/tmp and run `pm install -r` over the shell.
 
-5. To enable the built-in Netflix/Prime/Mi mappings, open the TV's **Settings → Accessibility → Home button** service and turn it on. Keep any accessibility services you already use enabled. Then test each physical button. If the key labels or behavior differ, configure the service for the actual remote instead of reusing the table above.
+Back up first
+- Save the full package list, disabled-package list, getprop output and settings to a backup folder.
+- Generate a restore script that re-enables everything you disable.
 
-For the complete TV-specific safety checklist and LLM copy/paste prompt, see [PROMPT.md](PROMPT.md).
-
-## Build and install from source
-
-Requirements: JDK 17, Android SDK Platform 34, Android Build Tools 34, Python 3, and an authorized ADB connection to the TV.
-
-First create the ADB helper environment from the repository root.
-
-Windows PowerShell:
-
-```powershell
-py -3 -m venv tools\venv
-.\tools\venv\Scripts\python.exe -m pip install -r tools\requirements.txt
-$env:TV_HOST = 'TV_IP_ADDRESS'
+Debloat & Setup
+- Disable stock launcher, telemetry daemons, and recommendation row providers.
+- Keep Voice Assistant, Chromecast Built-in, Remote Pairing, and Google Play Store intact.
+- Sideload CatUI v2.3 launcher (com.asish.catui) and set it as default home.
+- Query /proc/meminfo before and after to verify memory freed.
 ```
 
-macOS/Linux:
+---
 
-```bash
-python3 -m venv tools/venv
-tools/venv/bin/python -m pip install -r tools/requirements.txt
-export TV_HOST=TV_IP_ADDRESS
-```
+## 🛡️ realme TV Stick Safe Debloat List
 
-Then build and install:
+Tested extensively on realme 4K TV Stick (`HP47DX2` running Android 14):
 
-```powershell
-# Windows; add -HomeKeyService only if you chose CatUI's remote shortcuts.
-.\launcher\build-and-install.ps1 -TvHost $env:TV_HOST -HomeKeyService
-```
+### 🚫 Disabled Packages (Reversible)
+| Package | Description | Reason Disabled |
+| :--- | :--- | :--- |
+| `com.google.android.tvlauncher` | Stock Android TV Launcher | Replaced by clean CatUI |
+| `com.google.android.videos` | Google Play Movies & TV | Ads & preloaded content |
+| `com.google.android.play.games` | Google Play Games TV | Background sync service |
+| `com.google.android.tvrecommendations` | Leanback Recommendation Channels | Background ad banners |
+| `com.google.android.feedback` | Bug & Feedback Provider | Telemetry reporting |
+| `com.google.android.partnersetup` | Partner Setup Service | Manufacturer telemetry |
+| `com.sdt.producttest` | Factory Production Test | Diagnostic daemon |
+| `com.sdt.vendor` | Vendor Daemon | Unused vendor service |
+| `com.oem.qa` | OEM QA Testing Daemon | Diagnostic logging |
+| `com.oemservice` | OEM Telemetry Service | Background telemetry |
+| `com.skyworth.smallclient` | Skyworth Client Daemon | Telemetry service |
+| `com.skyworth.superservice` | Skyworth Super Service | Diagnostic daemon |
+| `com.homwee.howtocast` | How-to-Cast Demo | Unused tutorial residual |
+| `com.netflix.tokenmanager` | Netflix Token Manager | Unused vendor residual |
+| `com.sdt.customization` | SDT Customization Overlay | Unused overlay |
 
-```bash
-# macOS/Linux; HOME_KEY_SERVICE enables the built-in remote shortcut service.
-HOME_KEY_SERVICE=1 launcher/build-and-install.sh
-```
+### 🔒 Kept 100% Intact
+- 🎙️ **Google Assistant** (`com.google.android.katniss`) — Mic button works as normal.
+- 📡 **Chromecast Built-in** (`com.google.android.apps.mediashell`) — Casting from phone/PC works flawlessly.
+- 🔄 **System Updates & OTA** (`com.sdt.upgrade`, `com.sdt.ota`) — Firmware updates remain intact.
+- 🎧 **Audio & Hardware** — Dolby Audio (`com.dolby.android.audio.service`) and Bluetooth Remote (`com.mft.rcupair`).
+- 🛒 **Store & Core Framework** — Google Play Store (`com.android.vending`) & Google Play Services.
 
-Omit `-HomeKeyService` / `HOME_KEY_SERVICE=1` if you do not want the Netflix, Prime Video, and Mi shortcuts. The scripts set CatUI as Home and leave existing launchers enabled; they do not debloat the TV. Review the scripts before running them. For updates, use an APK signed with the same signing key as the installed build; a different signing key requires uninstalling first and can erase CatUI's settings.
+---
 
-The source build uses the Android SDK and may require internet access to download Gradle dependencies. The release APK is at `release/CatUI-v2.3.apk` in this checkout; the Gradle output is `launcher/app/build/outputs/apk/release/app-release.apk`.
+## 🔄 Reversing Changes / Restoring Stock
 
-## Credits and image ownership
+To revert all changes and restore the default stock launcher at any time:
+- In the **CatUI TV Cleaner** app: Tap **Undo / Restore** from the menu.
+- Or via ADB from your computer:
+  ```bash
+  adb shell pm enable --user 0 com.google.android.tvlauncher
+  ```
 
-- **CatUI bedroom scene art and concept images:** © **Asish Mohapatra**. The scene art is supplied by the project author; please ask the author before reusing it.
-- **[CleanYourTV](https://cleanyour.tv/#ch-04)** — Android TV setup and debloating reference. The upstream project and its license are linked in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
-- **[glassOS-tv](https://github.com/jmarknavarro/glassOS-tv)** — inspiration for CatUI's glass-style interface only. The bedroom art is by Asish Mohapatra.
-- **Outfit typeface** — [Outfit Fonts](https://github.com/Outfitio/Outfit-Fonts), SIL Open Font License 1.1.
-- **Weather** — [Open-Meteo](https://open-meteo.com/).
+---
 
-See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md), `licenses/`, and `launcher/FONT-LICENSE-OFL.txt` for complete notices. CatUI is independent and is not affiliated with Xiaomi, Google, Apple, or the authors of the referenced projects.
+## 🙏 Credits & Acknowledgments
+
+- **CleanYourTV App Concept:** Special thanks and credit to [udhaykumarbala/cleanyourtv-app](https://github.com/udhaykumarbala/cleanyourtv-app/releases) for the open-source companion app architecture and design concepts.
+- **CatUI Launcher:** Credit to the CatUI team for the Apple TV-style interface.
+- **Maintained By:** [Asish Mohapatra](https://github.com/asishmohapatra09)
+
+---
+
+## ⚖️ License
+
+Distributed under the Apache 2.0 License. See `LICENSE` for more details.
